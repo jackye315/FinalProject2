@@ -19,7 +19,7 @@ class Monster{
   health -=i;
   }
   
-  void move(){
+  void mDisplay(){
       for (int i = 0; i < speed; i++){
           current = current.getNext();
           xcor = current.getx();
