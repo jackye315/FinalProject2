@@ -12,16 +12,16 @@ class Monster{
       ycor = y;
       damage = d;
       health = h;
-      Linkedpoint l;
+      current = l;
   }
   
   void takedamage(int i){
-      health -= i:
+  health -=i;
   }
   
   void move(){
       for (int i = 0; i < speed; i++){
-          current = LinkedPoint.getNext();
+          current = current.getNext();
           xcor = current.getx();
           ycor = current.gety();
       }
