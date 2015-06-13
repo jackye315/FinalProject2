@@ -21,10 +21,15 @@ class Monster{
   
   void display(){
       for (int i = 0; i < speed; i++){
+      if (current.getnext() == null){
+        return;
+        }
+        else{
           current = current.getNext();
           xcor = current.getx();
           ycor = current.gety();
           ellipse(xcor,ycor,20,20);
+      }
       }
   }
   
