@@ -20,6 +20,10 @@ class Monster{
   }
   
   void display(){
+    if (health<=0){
+      population.remove(this);
+      }
+      else{
       for (int i = 0; i < speed; i++){
       if (current.getnext() == null){
         return;
@@ -29,6 +33,7 @@ class Monster{
           xcor = current.getx();
           ycor = current.gety();
           ellipse(xcor,ycor,20,20);
+      }
       }
       }
   }
