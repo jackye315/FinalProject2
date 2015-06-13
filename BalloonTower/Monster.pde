@@ -6,7 +6,7 @@ class Monster{
   int health;
   LinkedPoint current;
 
-  Monster( int s,int d, int h, LinkedPoint l){
+  Monster( int s, int d, int h, LinkedPoint l){
       speed = s;
       damage = d;
       health = h;
@@ -20,22 +20,25 @@ class Monster{
   }
   
   void display(){
-    if (health<=0){
+    if (health <= 0){
       population.remove(this);
-      }
-      else{
-      for (int i = 0; i < speed; i++){
-      if (current.getnext() == null){
-        return;
+    }
+    else{
+             for (int i = 0; i < speed; i++){
+               if (current.getNext() == null){
         }
+        
         else{
           current = current.getNext();
           xcor = current.getx();
           ycor = current.gety();
-          ellipse(xcor,ycor,20,20);
+          ellipse(xcor, ycor, 20, 20);
+        
       }
       }
-      }
+  
   }
+  }
+  
   
 }
