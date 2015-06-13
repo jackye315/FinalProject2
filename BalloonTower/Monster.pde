@@ -6,13 +6,13 @@ class Monster{
   int health;
   LinkedPoint current;
 
-  Monster( int s, int x, int y, int d, int h, LinkedPoint l){
+  Monster( int s,int d, int h, LinkedPoint l){
       speed = s;
-      xcor = x;
-      ycor = y;
       damage = d;
       health = h;
       current = l;
+      xcor = current.getx();
+      ycor = current.gety();
   }
   
   void takedamage(int i){
