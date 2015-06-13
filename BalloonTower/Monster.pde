@@ -19,11 +19,12 @@ class Monster{
   health -=i;
   }
   
-  void mDisplay(){
+  void display(){
       for (int i = 0; i < speed; i++){
           current = current.getNext();
           xcor = current.getx();
           ycor = current.gety();
+          ellipse(xcor,ycor,20,20);
       }
   }
   
