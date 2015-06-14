@@ -18,7 +18,7 @@ class Monster{
   void takedamage(int i){
   health -=i;
   }
-  
+  /*
   void display(){
     if (health <= 0){
       population.remove(this);
@@ -39,6 +39,6 @@ class Monster{
   
   }
   }
-  
+  */
   
 }
