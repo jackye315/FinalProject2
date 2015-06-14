@@ -8,6 +8,8 @@
   int round;
   int money;
   int MONSTERSLEFT;
+  Monster[] monsters;
+  Tower[] tower;
   
   void setup(){
      size(830,650);
@@ -34,6 +36,7 @@
          }
       }
       info();
+      towertypes();
 
   }
   
@@ -59,8 +62,22 @@
      text("Round"+round,730,640);
   }
   
+  void towertypes(){
+   fill(255);
+   rect(600,450,100,50);
+   text("Tower 1", 630,460);
+   rect(650,460,10,10);   
+  }
+  
+  Tower chooseTower(){
+     if(mouseX>650 && mouseX<660 && mouseY>460 && mouseY<470){
+      return tower[0];
+     } 
+  }
+  
   void mouseClicked(){
-    placeTower();    
+    placeTower(); 
+    chooseTower();   
 }
   
   void keyPressed(){
