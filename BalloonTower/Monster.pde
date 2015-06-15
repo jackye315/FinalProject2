@@ -80,8 +80,9 @@ class Monster{
     else{
              for (int i = 0; i < speed; i++){
                if (current.getNext() == null){
-                   attacking.remove(this);
-                  hp -= 10; 
+                 ellipse(xcor,ycor,20,20);
+                attacking.remove(this);
+                
                }
         
         else{
