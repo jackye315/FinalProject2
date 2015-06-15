@@ -1,0 +1,71 @@
+ArrayList<Monster> attacking;
+ArrayList<Monster> population;
+int pop_size = 17;
+int tilesize = 10;
+LinkedPoint start;
+boolean popdes = false;
+int hp;
+Monster best;
+
+void setup(){
+  size(800,800);
+  attacking = new ArrayList<Monster>();
+  setpath();
+  populate();
+
+}
+
+void setpath(){
+  int x =10;
+  int y =10;
+ start = new LinkedPoint(5,5);
+ LinkedPoint current = start;
+ while (x< 100){
+   x+= 1;
+   current.setNext(new LinkedPoint(x,y));
+   current = current.getNext();
+ }
+ while (y < 100){
+     y +=1;
+     current.setNext(new LinkedPoint(x,y));
+    current = current.getNext();
+}
+while (x>30){
+  x-=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+}
+}
+void draw(){
+  
+  background(255);
+  text(attacking.size(),20 , 20);
+   if (attacking.size() != 0){
+        for (int i =0; i < attacking.size(); i++){
+          attacking.get(i).display();
+        }
+   }
+  if (attacking.size() == 1){
+    Matingseason();
+   }
+  
+        
+   }
+  void Matingseason(){
+     populate();
+    }
+   
+   
+
+void populate(){
+  ArrayList<Monster> newp = new ArrayList<Monster>();
+    Random rn = new Random();
+  for (int i = 0; i < 17; i++){
+    
+    newp.add(new Monster(rn.nextInt(14),18, start,3,3,111));
+  }
+  attacking = newp;
+  population = newp;
+
+}
+      
