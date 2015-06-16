@@ -85,6 +85,7 @@ class Monster{
       oldwave.add(this);
       this.current = startloc;
       attacking.remove(this);
+      money += 50;
       
     }
     else{
