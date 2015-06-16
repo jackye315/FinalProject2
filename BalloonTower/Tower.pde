@@ -7,7 +7,8 @@ class Tower{
   int xcor;
   int ycor; 
   ArrayList<Monster> Range=new ArrayList<Monster>();  //ArrayList of all monsters in Tower's range
-  Monster M;
+  Monster M=new Monster(0,0,0,0,0);;
+  
   Tower(int r, int fd, int fr, int x, int y){
     range=r;
     fdamage=fd;
@@ -18,14 +19,17 @@ class Tower{
   
   Monster findtarget(){
      int x=0;
-     Monster target=Range.get(0);
-     while(x<Range.size()){
-       if(Distance(target)<Distance(Range.get(0))){
-        target=Range.get(0); 
-       }
-       x=x+1;
-     }
-     return target; 
+     //if(Range.size()>0){
+         Monster target=Range.get(0);
+         while(x<Range.size()){
+           if(Distance(target)<Distance(Range.get(0))){
+            target=Range.get(0); 
+           }
+           x=x+1;
+         }
+         return target; 
+      //}
+   //return M;
   }
   
   int Distance(Monster M){
@@ -50,7 +54,7 @@ class Tower{
     return Math.atan((double)x/y);
   }
   
-  void Shoot(Monster M){
+  void Shoot(){
      findtarget().health=findtarget().health-fdamage; 
   }
   
