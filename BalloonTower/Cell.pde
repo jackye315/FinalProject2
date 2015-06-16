@@ -49,9 +49,12 @@ class Cell{
   else  if (y == 465 && x <= 315 && x >=75){
     return true;
     }
-  else  if (x == 315 && y<=555 && y >= 465){
+  else  if (x == 75 && y<=555 && y >= 465){
     return true;
     }
+  else if(y == 55 && x >=75 && x<=315){
+  return true;
+  }
  
 }
     
