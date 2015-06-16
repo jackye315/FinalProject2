@@ -10,8 +10,11 @@
   int MONSTERSLEFT;
   ArrayList<Monster> attacking;
   ArrayList<Monster> oldwave;
- double totalfitness;
- double totaldistance;
+  double totalfitness;
+  double totaldistance;
+  int counter;
+  LinkedPoint startloc;
+ int popsize = 17;
 
   
   
@@ -22,6 +25,16 @@
   
   void setup(){
      size(830,650);
+    
+    // Monster setup + path 
+       attacking = new ArrayList<Monster>();
+    oldwave = new ArrayList<Monster>();
+    setpath();
+     populate();
+     
+     
+     
+     // Map set up
      map=new Cell[rows][cols];
      for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
@@ -53,6 +66,25 @@
       info();
       towertypes();
 
+   // monster
+  if (attacking.size() != 0){
+        for (int i =0; i < attacking.size(); i++){
+          int  d = attacking.size();
+          attacking.get(i).display();
+          if (attacking.size() < d){
+            
+            i-=1;
+             
+            counter += 1;
+          }
+         }
+   }
+   if (attacking.size() == 0){
+    nextwave();
+ 
+        
+   }
+  
   }
   
   void placeTower(){
@@ -100,6 +132,105 @@
    if(key==ENTER){
       start=false;
    } 
+   
+   // Monster methods
+   void setpath(){
+  int x =10;
+  int y =10;
+ startloc = new LinkedPoint(5,5);
+ LinkedPoint current = startloc;
+ while (x< 100){
+   x+= 1;
+   current.setNext(new LinkedPoint(x,y));
+   current = current.getNext();
+   totaldistance +=1;
+ }
+ while (y < 100){
+     y +=1;
+     current.setNext(new LinkedPoint(x,y));
+    current = current.getNext();
+    totaldistance +=1;
+}
+while (x>30){
+  x-=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance +=1;
+}
+while (y < 200){
+   y+=1;
+   current.setNext(new LinkedPoint(x,y));
+   current = current.getNext();
+   totaldistance+=1;
+}
+while (x <400){
+  x+=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance+=1;
+}
+}
+
+void nextwave(){
+    setfitness();
+    findtotfit();
+      ArrayList<Monster> population = new ArrayList<Monster>();
+
+    for (int e =0; e < oldwave.size(); e++){
+        population.add(select().mate(select()))  ;
+    }
+    
+    for (int i =0; i<oldwave.size(); i++){
+      oldwave.remove(i);
+    }
+    
+  for  (int l = 0; l< population.size() ; l++){
+    population.get(l).clearfit();
+  }
+  attacking = population;
+  }
+  
+  
+  void setfitness(){
+    for (int i =0; i< oldwave.size(); i++){
+       oldwave.get(i).setFit();
+    }
+    
+  }
+  void findtotfit(){
+    totalfitness =  0;
+    for (int i =0; i <oldwave.size(); i++){
+      totalfitness += oldwave.get(i).fitness;
+    }
+  }
+  Monster select(){
+    Random rn = new Random();
+    double goal = totalfitness *rn.nextDouble();
+    double current = 0;
+    for (int i =0; i<36; i++){
+        current += oldwave.get(i).getfit();
+        if (current >= goal){
+            return  oldwave.get(i);
+        }
+    }
+    return oldwave.get(rn.nextInt(15));
+  }
+     
+  
+   
+
+void populate(){
+  ArrayList<Monster> newp = new ArrayList<Monster>();
+    Random rn = new Random();
+  for (int i = 0; i < popsize; i++){
+    
+    newp.add(new Monster(rn.nextInt(4)+1,18, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+
+  }
+  attacking = newp;
+}
+
+
   }
   
 
