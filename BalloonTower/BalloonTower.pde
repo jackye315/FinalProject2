@@ -196,7 +196,7 @@ while (x>= 75){
   current = current.getNext();
   totaldistance +=1;
 }
-while (y <= 465){
+while (y <= 555){
   y +=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
@@ -205,12 +205,6 @@ while (y <= 465){
 while (x<=315){
   x+=1;
   current.setNext(new LinkedPoint(x,y));
-  current = current.getNext();
-  totaldistance +=1;
-}
-while (y<= 555){
-  y+=1;
-  current.setNext(new LinkedPoint (x,y));
   current = current.getNext();
   totaldistance +=1;
 }
