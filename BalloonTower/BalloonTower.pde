@@ -15,6 +15,7 @@
   int counter;
   LinkedPoint startloc;
  int popsize = 17;
+ int wavenumber;
 
   
   
@@ -25,7 +26,7 @@
   
   void setup(){
      size(830,650);
-    
+    money = 300;
     // Monster setup + path 
        attacking = new ArrayList<Monster>();
     oldwave = new ArrayList<Monster>();
@@ -139,35 +140,65 @@
   int y =10;
  startloc = new LinkedPoint(5,5);
  LinkedPoint current = startloc;
- while (x< 100){
+ while (x<= 165){
    x+= 1;
    current.setNext(new LinkedPoint(x,y));
    current = current.getNext();
    totaldistance +=1;
  }
- while (y < 100){
+ while (y <= 135){
      y +=1;
      current.setNext(new LinkedPoint(x,y));
     current = current.getNext();
     totaldistance +=1;
 }
-while (x>30){
+while (x>=45){
   x-=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance +=1;
 }
-while (y < 200){
+while (y <= 225){
    y+=1;
    current.setNext(new LinkedPoint(x,y));
    current = current.getNext();
    totaldistance+=1;
 }
-while (x <400){
+while (x <=375){
   x+=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance+=1;
+}
+while (y<=465){
+  y+=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance += 1;
+}
+while (x>= 75){
+  x-=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance +=1;
+}
+while (y <= 465){
+  y +=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance +=1;
+}
+while (x<=315){
+  x+=1;
+  current.setNext(new LinkedPoint(x,y));
+  current = current.getNext();
+  totaldistance +=1;
+}
+while (y<= 555){
+  y+=1;
+  current.setNext(new LinkedPoint (x,y));
+  current = current.getNext();
+  totaldistance +=1;
 }
 }
 
@@ -224,7 +255,7 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(4)+1,18, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(1,1, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;
