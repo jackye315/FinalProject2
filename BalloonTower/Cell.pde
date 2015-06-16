@@ -52,9 +52,7 @@ class Cell{
   else  if (x == 315 && y<=555 && y >= 465){
     return true;
     }
-    else{
-    return false;
-    }
+ 
 }
     
   
