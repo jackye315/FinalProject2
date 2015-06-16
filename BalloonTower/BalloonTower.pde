@@ -3,7 +3,7 @@
   int cols=13;
   
   PImage img;
-  boolean start=true;
+  boolean start=false;
   int phealth;
   int round;
   int money;
@@ -32,6 +32,8 @@
     oldwave = new ArrayList<Monster>();
     setpath();
      populate();
+    settiles();
+    
      
      
      
@@ -51,12 +53,24 @@
    img=loadImage("Tower1.png");
   }
   
+  settiles(){
+   for (int i =0; i <Cell.lenght; i++){
+    for (int d = 0; d<Cell[0].length; d++){
+      if (Cell[i][d].partof()){
+      Cell[i][d].ispath();
+      }
+      }
+      }
+      }
+
+  
   void draw(){
-    if(start){
+    if(!start){
      fill(255);
      text("Balloons Tower Defense",30,580);
      text("Press Enter to Play",30,600); 
     }
+    if (start){
      background(200);
      for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
@@ -131,7 +145,7 @@
   
   void keyPressed(){
    if(key==ENTER){
-      start=false;
+      start=true;
    } 
   }
    // Monster methods
