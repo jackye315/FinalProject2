@@ -132,7 +132,7 @@
    if(key==ENTER){
       start=false;
    } 
-   
+  }
    // Monster methods
    void setpath(){
   int x =10;
@@ -231,7 +231,7 @@ void populate(){
 }
 
 
-  }
+  
   
 
  
