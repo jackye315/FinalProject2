@@ -6,6 +6,7 @@ class Tower{
   int frate;  //Fire rate
   int xcor;
   int ycor; 
+  int money=50;
   ArrayList<Monster> Range=new ArrayList<Monster>();  //ArrayList of all monsters in Tower's range
   Monster M=new Monster(0,0,0,0,0);;
   
@@ -55,7 +56,9 @@ class Tower{
   }
   
   void Shoot(){
+    if(Range.size()>0){
      findtarget().health=findtarget().health-fdamage; 
+    }
   }
   
   

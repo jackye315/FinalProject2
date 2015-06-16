@@ -4,8 +4,9 @@
   
   PImage img;
   boolean start=false;
-  int phealth;
-  int round;
+  boolean rest;
+  int phealth=100;
+  int round=1;
   int money;
   int MONSTERSLEFT;
   ArrayList<Monster> attacking;
@@ -16,6 +17,8 @@
   LinkedPoint startloc;
  int popsize = 17;
  int wavenumber;
+ boolean reachedend=false;
+ int timer=0;
 
   
   
@@ -26,14 +29,13 @@
   
   void setup(){
      size(830,650);
-    money = 300;
+     money = 300;
     // Monster setup + path 
-       attacking = new ArrayList<Monster>();
-    oldwave = new ArrayList<Monster>();
-    setpath();
+     attacking = new ArrayList<Monster>();
+     oldwave = new ArrayList<Monster>();
+     setpath();
      populate();
-    //settiles();
-    
+
      
      
      
@@ -44,7 +46,9 @@
             map[i][j] = new Cell(i*30,j*30,30,30,0);
         }
      }
-          ingametowers=new ArrayList<Tower>();
+     settiles();
+    
+     ingametowers=new ArrayList<Tower>();
      tower=new Tower[5];
      int x=0;
      while(x<tower.length){
@@ -52,11 +56,14 @@
         x=x+1; 
      }
    img=loadImage("Tower1.png");
+   rest=false;
+   MONSTERSLEFT=attacking.size();
+   reachedend=false;
   }
- /* 
+ 
   void settiles(){
-   for (int i =0; i <map.length; i++){
-    for (int d = 0; d<map[0].length; d++){
+   for (int i =0; i <20; i++){
+    for (int d = 0; d<20; d++){
       if (map[i][d].partof()){
       map[i][d].ispath();
       }
@@ -64,14 +71,16 @@
       }
       }
 
- */ 
+ 
   void draw(){
     if(!start){
      fill(255);
-     text("Balloons Tower Defense",30,580);
+     textSize(40);
+     text("Balloons Tower Defense",30,540);
      text("Press Enter to Play",30,600); 
     }
     if (start){
+
      background(200);
      for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
@@ -92,66 +101,103 @@
        y=y+1; 
      }
      ingametowers.get(x).Shoot();
-     ingametowers.get(x).Shoot();
-     ingametowers.get(x).Shoot();
-     ingametowers.get(x).Shoot();
-     ingametowers.get(x).Shoot();
-     ingametowers.get(x).Shoot();
+     MONSTERSLEFT=attacking.size();
      x=x+1;
    }
+   
+   
    // monster
+   timer=timer+1;
+
   if (attacking.size() != 0){
+    if(timer>1){
         for (int i =0; i < attacking.size(); i++){
-          int  d = attacking.size();
-          attacking.get(i).display();
-          if (attacking.size() < d){
-            
-            i-=1;
-             
-            counter += 1;
-          }
+
+            int  d = attacking.size();
+            attacking.get(i).display();
+            if (attacking.size() < d){
+              
+              i-=1;
+               
+              counter += 1;
+            }
+
          }
-   }
+
+    }
+
+  }
    if (attacking.size() == 0){
+     if(rest==true){
+     fill(0,102,153);
+     textSize(20);
+     text("Continue to next wave? Click Enter to Continue", 600,230);
+     text("Click Enter to Continue", 600,260);
+     }
+     else{
     nextwave();
- 
+    round=round+1;
+     }
         
    }
-  System.out.println(attacking.get(1).health);
-System.out.println(attacking.get(0).health);
+   //Monsterdamage();
+  //System.out.println(attacking.get(1).health);
+//System.out.println(attacking.get(0).health);
 System.out.println(ingametowers.size()); 
 System.out.println(attacking.size());    
   }
   }
   
   void placeTower(){
-      if(mouseX <400 && mouseY < 400){
-        if(map[mouseY/30][(mouseX)/30].getCond()==0){
+      if(mouseX <600 && mouseY < 600){
+        if(map[mouseY/30][(mouseX)/30].getCond()==0 && map[mouseY/30][mouseX/30].canbuild==true){
           map[mouseY/30][(mouseX)/30].setCond(1);
           
-        }
         
+        
+      
+      if(money>50){
+        if(ingametowers.size()==0){
+            Tower T1=new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30);
+            ingametowers.add(T1);
+            money=money-50;
+        }
+        else{
+        int x=0;
+        while(x<ingametowers.size()){
+          if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
+              Tower T1=new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30);
+              ingametowers.add(T1);
+              money=money-50;
+              x=x+ingametowers.size();
+          }
+          x=x+1;
+        }
+        }
       }
-      Tower T1=new Tower(100000,20000,1000,(mouseX/30)*30,(mouseY/30)*30);
-      ingametowers.add(T1);
+      }
+  }
+
   }
   
   
   void info(){
      fill(255);
-     rect(700,550,100,50);
-     text("Stats", 730,550);
-     text("Health"+phealth,730,580);
-     text("Money"+money,730,600);
-     text("Monsters Left"+MONSTERSLEFT,730,620);
-     text("Round"+round,730,640);
+     //rect(700,550,100,50);
+     fill(0,102,153);
+     textSize(20);
+     text("Stats", 630,300);
+     text("Health: "+phealth,630,330);
+     text("Money: "+money,630,350);
+     text("Monsters Left: "+MONSTERSLEFT,630,370);
+     text("Round: "+round,630,390);
   }
   
   void towertypes(){
    fill(255);
-   rect(600,450,100,50);
-   text("Tower 1", 630,460);
-   rect(650,460,10,10);   
+   //rect(600,450,100,50);
+   //text("Tower 1", 630,460);
+   //rect(650,460,10,10);   
   }
   
   Tower chooseTower(){
@@ -169,8 +215,14 @@ System.out.println(attacking.size());
   void keyPressed(){
    if(key==ENTER){
       start=true;
-   } 
+      rest=!rest;
+   }
+
   }
+  
+  
+  
+  
    // Monster methods
    void setpath(){
   int x =10;
@@ -182,58 +234,80 @@ System.out.println(attacking.size());
    current.setNext(new LinkedPoint(x,y));
    current = current.getNext();
    totaldistance +=1;
+
  }
  while (y <= 135){
      y +=1;
      current.setNext(new LinkedPoint(x,y));
     current = current.getNext();
     totaldistance +=1;
+
 }
 while (x>=45){
   x-=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance +=1;
+
 }
 while (y <= 225){
    y+=1;
    current.setNext(new LinkedPoint(x,y));
    current = current.getNext();
    totaldistance+=1;
+
 }
 while (x <=375){
   x+=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance+=1;
+
 }
 while (y<=465){
   y+=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance += 1;
+
 }
 while (x>= 75){
   x-=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance +=1;
+
 }
 while (y <= 555){
   y +=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance +=1;
+
 }
-while (x<=315){
+while (x<=600){
   x+=1;
   current.setNext(new LinkedPoint(x,y));
   current = current.getNext();
   totaldistance +=1;
+
 }
 }
 
+void Monsterdamage(){
+  int x=0;
+  while(x<attacking.size()){
+      if(attacking.get(x).xcor>599 && attacking.get(x).ycor>550){
+         reachedend=true;
+         phealth=phealth-1;
+      } 
+      x=x+1;
+  }
+
+}
+
 void nextwave(){
+  rest=true;
     setfitness();
     findtotfit();
       ArrayList<Monster> population = new ArrayList<Monster>();
@@ -269,7 +343,7 @@ void nextwave(){
     Random rn = new Random();
     double goal = totalfitness *rn.nextDouble();
     double current = 0;
-    for (int i =0; i<36; i++){
+    for (int i =0; i<17; i++){
         current += oldwave.get(i).getfit();
         if (current >= goal){
             return  oldwave.get(i);
@@ -286,10 +360,11 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(3),rn.nextInt(3), rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(rn.nextInt(10),rn.nextInt(10), rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;
+  //oldwave=attacking;
 }
 
 

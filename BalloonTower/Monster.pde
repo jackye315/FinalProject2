@@ -95,6 +95,7 @@ class Monster{
                  this.current = startloc;
                 oldwave.add(this);
                 attacking.remove(this);
+                phealth=phealth-1;
                 
                }
         

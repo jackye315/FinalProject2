@@ -22,39 +22,40 @@ class Cell{
   }
   void ispath(){
    red= 0;
-   blue = 0;
-   green = 0;
+   blue = 102;
+   green = 153;
    canbuild = false;
    }
    
    boolean partof(){
-   if (y == 15 && x >= 15 && x <=165){
+   if (x < 15 && y >= 15 && y <=165){
     return true;
     }
-  else if (x = 165 && y >= 15 && y <=135){
+  else if (y>130 && y < 167 && x >= 15 && x <=135){
    return true;
    }
-   else if (y == 135 && x >=45 && x <=165){
+   else if (x>105 && x < 135 && y >=15 && y <=165){
    return true;
    }
-  else if (x == 45 && y >= 135 && y <= 225){
+  else if (y>15 && y < 45 && x >= 135 && x <= 225){
    return true;
    }
-   else if (y == 225 && x <= 375 && x>= 45){
+   else if (x>195 && x < 225 && y <= 375 && y>= 45){
     return true;
     }
-    else if (x == 375 && y <= 465 && y >= 225){
+    else if (y>345 && y < 375 && x <= 465 && x >= 225){
     return true;
     }
-  else  if (y == 465 && x <= 315 && x >=75){
+  else  if (x> 435 && x < 465 && y <= 345 && y >=45){
     return true;
     }
-  else  if (x == 75 && y<=555 && y >= 465){
+  else  if (y>45 && y < 75 && x<=555 && x >= 465){
     return true;
     }
-  else if(y == 55 && x >=75 && x<=315){
+  else if( x< 555 && x > 525 && y >= 75 && y<=600){
   return true;
   }
+  return false;
  
 }
     
