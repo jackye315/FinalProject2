@@ -8,26 +8,29 @@ class Monster{
   int bluecolor;
   int greencolor;
   LinkedPoint current;
-  int fitness;
+  double fitness;
+  double distance;
 
-  Monster( int s, int h, LinkedPoint l, int r, int b, int g){
+  Monster(int s, int h, int r, int b, int g){
       speed = s;
       health = h;
-      current = l;
+      current = startloc;
       xcor = current.getx();
       ycor = current.gety();
       redcolor = r;
       bluecolor = b;
       greencolor = g;
+      distance = 0;
   }
   
-  Monster mate (Monster other, LinkedPoint l){
+  Monster mate (Monster other){
     Random rn = new Random();
     int s;
     int h;
     int r;
     int g;
     int b;
+    
       if (rn.nextInt(2) == 0){
           s = other.speed;
       }
@@ -58,35 +61,45 @@ class Monster{
       else{
           b = bluecolor;
         }
+      
        
-    Monster m = new Monster( s,h,l,r,g,b);
+    Monster m = new Monster( s,h,r,g,b);
   return m;
   }
-  void setFit(Monster best){
+  void setFit(){
       double fit = 100.0;
-      fit -= abs(best.speed - this.speed/10) * 50;
-      fit -= abs(best.health - this.health/30)*50;
+      fit -= (totaldistance -distance) + (0/totaldistance*100);
+      fitness = fit;
+  }
+  
+  void clearfit(){
+    fitness =0;
   }
     
-  
-  void takedamage(int i){
-  health -=i;
-  }
+ double getfit(){
+     return fitness;
+ }
   
   void display(){
     if (health <= 0){
+      oldwave.add(this);
+      this.current = startloc;
       attacking.remove(this);
+      
     }
     else{
              for (int i = 0; i < speed; i++){
                if (current.getNext() == null){
                  ellipse(xcor,ycor,20,20);
+                 this.current = startloc;
+                oldwave.add(this);
                 attacking.remove(this);
                 
                }
         
         else{
           current = current.getNext();
+          distance +=1;
           xcor = current.getx();
           ycor = current.gety();
           ellipse(xcor, ycor, 20, 20);
