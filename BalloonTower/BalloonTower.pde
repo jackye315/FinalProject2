@@ -8,7 +8,16 @@
   int round;
   int money;
   int MONSTERSLEFT;
-  Monster[] monsters;
+  ArrayList<Monster> attacking;
+  ArrayList<Monster> oldwave;
+ double totalfitness;
+ double totaldistance;
+
+  
+  
+  
+  
+  
   Tower[] tower;
   
   void setup(){
