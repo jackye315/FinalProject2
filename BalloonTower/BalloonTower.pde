@@ -94,6 +94,9 @@
      ingametowers.get(x).Shoot();
      ingametowers.get(x).Shoot();
      ingametowers.get(x).Shoot();
+     ingametowers.get(x).Shoot();
+     ingametowers.get(x).Shoot();
+     ingametowers.get(x).Shoot();
      x=x+1;
    }
    // monster
