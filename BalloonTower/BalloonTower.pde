@@ -200,7 +200,7 @@ System.out.println(start);
      text("Stats", 630,300);
      text("Health: "+phealth,630,330);
      text("Money: "+money,630,350);
-     text("Monsters Left: "+MONSTERSLEFT,630,370);
+     text("Monsters Left: "+attacking.size(),630,370);
      text("Round: "+round,630,390);
   }
   
@@ -324,7 +324,7 @@ void nextwave(){
     findtotfit();
       ArrayList<Monster> population = new ArrayList<Monster>();
 
-    for (int e =0; e < oldwave.size(); e++){
+    for (int e =0; e < popsize; e++){
         population.add(select().mate(select()))  ;
     }
     
@@ -372,20 +372,12 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(10),rn.nextInt(10), rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(rn.nextInt(8)+1,rn.nextInt(10), rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;
   //oldwave=attacking;
 }
-
-
-  
-  
-
- 
- 
- 
  
   
 
