@@ -23,7 +23,7 @@ class Cell{
   void ispath(){
    red= 0;
    blue = 0;
-   green = 0
+   green = 0;
    canbuild = false;
    }
    

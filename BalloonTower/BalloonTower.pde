@@ -1,6 +1,6 @@
   Cell[][] map;
-  int rows=13;
-  int cols=13;
+  int rows=20;
+  int cols=20;
   
   PImage img;
   boolean start=false;
@@ -21,7 +21,7 @@
   
   
   
-  
+    ArrayList<Tower> ingametowers;
   Tower[] tower;
   
   void setup(){
@@ -32,7 +32,7 @@
     oldwave = new ArrayList<Monster>();
     setpath();
      populate();
-    settiles();
+    //settiles();
     
      
      
@@ -44,6 +44,7 @@
             map[i][j] = new Cell(i*30,j*30,30,30,0);
         }
      }
+          ingametowers=new ArrayList<Tower>();
      tower=new Tower[5];
      int x=0;
      while(x<tower.length){
@@ -52,18 +53,18 @@
      }
    img=loadImage("Tower1.png");
   }
-  
-  settiles(){
-   for (int i =0; i <Cell.lenght; i++){
-    for (int d = 0; d<Cell[0].length; d++){
-      if (Cell[i][d].partof()){
-      Cell[i][d].ispath();
+ /* 
+  void settiles(){
+   for (int i =0; i <map.length; i++){
+    for (int d = 0; d<map[0].length; d++){
+      if (map[i][d].partof()){
+      map[i][d].ispath();
       }
       }
       }
       }
 
-  
+ */ 
   void draw(){
     if(!start){
      fill(255);
@@ -80,7 +81,21 @@
       }
       info();
       towertypes();
-
+ 
+   int x=0;
+   while(x<ingametowers.size()){
+     int y=0;
+     while(y<attacking.size()){
+        if(ingametowers.get(x).inRange(attacking.get(y))){
+           ingametowers.get(x).Range.add(attacking.get(y));
+        }
+       y=y+1; 
+     }
+     ingametowers.get(x).Shoot();
+     ingametowers.get(x).Shoot();
+     ingametowers.get(x).Shoot();
+     x=x+1;
+   }
    // monster
   if (attacking.size() != 0){
         for (int i =0; i < attacking.size(); i++){
@@ -99,7 +114,11 @@
  
         
    }
-  
+  System.out.println(attacking.get(1).health);
+System.out.println(attacking.get(0).health);
+System.out.println(ingametowers.size()); 
+System.out.println(attacking.size());    
+  }
   }
   
   void placeTower(){
@@ -110,7 +129,8 @@
         }
         
       }
-      Tower T1=new Tower(0,0,0,(mouseX/30)*30,(mouseY/30)*30);
+      Tower T1=new Tower(100000,20000,1000,(mouseX/30)*30,(mouseY/30)*30);
+      ingametowers.add(T1);
   }
   
   
