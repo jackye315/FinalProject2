@@ -27,6 +27,36 @@ class Cell{
    canbuild = false;
    }
    
+   boolean partof(){
+   if (y == 15 && x >= 15 && x <=165){
+    return true;
+    }
+  else if (x = 165 && y >= 15 && y <=135){
+   return true;
+   }
+   else if (y == 135 && x >=45 && x <=165){
+   return true;
+   }
+  else if (x == 45 && y >= 135 && y <= 225){
+   return true;
+   }
+   else if (y == 225 && x <= 375 && x>= 45){
+    return true;
+    }
+    else if (x == 375 && y <= 465 && y >= 225){
+    return true;
+    }
+  else  if (y == 465 && x <= 315 && x >=75){
+    return true;
+    }
+  else  if (x == 315 && y<=555 && y >= 465){
+    return true;
+    }
+    else{
+    return false;
+    }
+}
+    
   
   void display(int x, int y){
     fill(red, blue, green);
