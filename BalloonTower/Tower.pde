@@ -1,12 +1,12 @@
 import java.util.*;
 
 class Tower{
-  int range;
-  int fdamage;
-  int frate;
+  int range; //Distance Tower can fire ito
+  int fdamage; //fire damage
+  int frate;  //Fire rate
   int xcor;
-  int ycor;
-  
+  int ycor; 
+  ArrayList<Monster> Range=new ArrayList<Monster>();  //ArrayList of all monsters in Tower's range
   Monster M;
   Tower(int r, int fd, int fr, int x, int y){
     range=r;
@@ -37,7 +37,7 @@ class Tower{
   }
   
   ArrayList AllinRange(){
-      ArrayList Range=new ArrayList();
+      //Range=new ArrayList();
         if (inRange(M)){
            Range.add(M);
         }
@@ -45,13 +45,13 @@ class Tower{
   }
   
   double turnangle(){
-    int x=findtarget.xcor-this.xcor;
-    int y=findtarget.ycor-this.ycor;
+    int x=findtarget().xcor-this.xcor;
+    int y=findtarget().ycor-this.ycor;
     return Math.atan((double)x/y);
   }
   
   void Shoot(Monster M){
-     findtarget.health=health-fdamage; 
+     findtarget().health=findtarget().health-fdamage; 
   }
   
   

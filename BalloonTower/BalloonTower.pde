@@ -19,6 +19,12 @@
             map[i][j] = new Cell(i*30,j*30,30,30,0);
         }
      }
+     tower=new Tower[5];
+     int x=0;
+     while(x<tower.length){
+        tower[x]=new Tower(0,0,0,0,0);
+        x=x+1; 
+     }
    img=loadImage("Tower1.png");
   }
   
@@ -72,7 +78,8 @@
   Tower chooseTower(){
      if(mouseX>650 && mouseX<660 && mouseY>460 && mouseY<470){
       return tower[0];
-     } 
+     }
+    return tower[0]; 
   }
   
   void mouseClicked(){
