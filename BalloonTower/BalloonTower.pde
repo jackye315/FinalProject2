@@ -140,11 +140,24 @@
      }
         
    }
+   if(phealth<=0){
+      fill(255);
+      rect(0,0,850,600);
+      fill(0);
+      textSize(30);
+      text("You Lost!",300,300);
+      //text("Press 'Y'to play again",300,330); 
+        //if(key==ENTER){
+         //start=false; 
+        //}
+   }
    //Monsterdamage();
   //System.out.println(attacking.get(1).health);
 //System.out.println(attacking.get(0).health);
-System.out.println(ingametowers.size()); 
-System.out.println(attacking.size());    
+//System.out.println(ingametowers.size()); 
+//System.out.println(attacking.size());    
+System.out.println(oldwave.size());
+System.out.println(start);
   }
   }
   
@@ -158,16 +171,14 @@ System.out.println(attacking.size());
       
       if(money>50){
         if(ingametowers.size()==0){
-            Tower T1=new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30);
-            ingametowers.add(T1);
+            ingametowers.add(new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30));
             money=money-50;
         }
         else{
         int x=0;
         while(x<ingametowers.size()){
           if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
-              Tower T1=new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30);
-              ingametowers.add(T1);
+              ingametowers.add(new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30));
               money=money-50;
               x=x+ingametowers.size();
           }
@@ -217,6 +228,7 @@ System.out.println(attacking.size());
       start=true;
       rest=!rest;
    }
+
 
   }
   
