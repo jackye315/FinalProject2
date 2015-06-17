@@ -28,7 +28,7 @@ class Cell{
    }
    
    boolean partof(){
-   if (x < 15 && y >= 15 && y <=165){
+   if (x < 15 && y >= 0 && y <=165){
     return true;
     }
   else if (y>130 && y < 167 && x >= 15 && x <=135){

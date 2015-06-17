@@ -105,7 +105,7 @@
      x=x+1;
    }
    
-   
+   //MONSTERSLEFT=attacking.size();
    // monster
    timer=timer+1;
 
@@ -372,7 +372,7 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(8)+1,rn.nextInt(10), rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(rn.nextInt(8)+1,rn.nextInt(10)+10, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;
