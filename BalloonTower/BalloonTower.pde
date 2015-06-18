@@ -1,3 +1,5 @@
+//import java.util.concurrent;
+ 
   Cell[][] map;
   int rows=20;
   int cols=20;
@@ -20,7 +22,8 @@
  boolean reachedend=false;
  int timer=0;
 
-  
+  Thread foo = new Thread(this);
+  //foo.start();
   
   
   
@@ -113,7 +116,15 @@
   if (attacking.size() != 0){
     if(timer>1){
         for (int i =0; i < attacking.size(); i++){
-
+            //TimeUnit.SECONDS.sleep(10);
+/*
+try {
+            foo.sleep(10);
+       }
+     catch (InterruptedException e) {
+       e.printStackTrace();
+       }
+      */
             int  d = attacking.size();
             attacking.get(i).display();
             if (attacking.size() < d){
