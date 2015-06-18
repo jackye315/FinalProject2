@@ -137,7 +137,7 @@
      else{
     nextwave();
     round=round+1;
-    oldwave.clear;
+    oldwave.clear();
      }
         
    }
