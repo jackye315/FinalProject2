@@ -90,9 +90,10 @@
       }
       info();
       towertypes();
- 
+   
    int x=0;
    while(x<ingametowers.size()){
+     ingametowers.get(x).Range.clear();
      int y=0;
      while(y<attacking.size()){
         if(ingametowers.get(x).inRange(attacking.get(y))){
@@ -163,6 +164,7 @@ System.out.println(start);
   }
   
   void placeTower(){
+    if(money>=50){
       if(mouseX <600 && mouseY < 600){
         if(map[mouseY/30][(mouseX)/30].getCond()==0 && map[mouseY/30][mouseX/30].canbuild==true){
           map[mouseY/30][(mouseX)/30].setCond(1);
@@ -170,16 +172,16 @@ System.out.println(start);
         
         
       
-      if(money>50){
+
         if(ingametowers.size()==0){
-            ingametowers.add(new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30));
+            ingametowers.add(new Tower(60,1,1000,(mouseX/30)*30,(mouseY/30)*30));
             money=money-50;
         }
         else{
         int x=0;
         while(x<ingametowers.size()){
           if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
-              ingametowers.add(new Tower(100000,1,1000,(mouseX/30)*30,(mouseY/30)*30));
+              ingametowers.add(new Tower(60,1,1000,(mouseX/30)*30,(mouseY/30)*30));
               money=money-50;
               x=x+ingametowers.size();
           }
@@ -373,7 +375,7 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(8)+1,rn.nextInt(10)+10, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(rn.nextInt(1)+1,10000, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;
