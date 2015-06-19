@@ -20,7 +20,7 @@ class Tower{
   
   Monster findtarget(){
      int x=0;
-     //if(Range.size()>0){
+     if(Range.size()>0){
          Monster target=Range.get(0);
          while(x<Range.size()){
            if(Distance(target)<Distance(Range.get(0))){
@@ -29,8 +29,8 @@ class Tower{
            x=x+1;
          }
          return target; 
-      //}
-   //return M;
+      }
+   return M;
   }
   
   int Distance(Monster M){

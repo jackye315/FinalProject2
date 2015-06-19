@@ -105,6 +105,28 @@
        y=y+1; 
      }
      ingametowers.get(x).Shoot();
+     float bulletX=ingametowers.get(x).xcor;
+     float bulletY=ingametowers.get(x).ycor;
+     fill(255);
+     
+     ellipse(bulletX,bulletY,5,20);
+     if(Math.abs(ingametowers.get(x).findtarget().xcor-bulletX)>0){
+         if(ingametowers.get(x).findtarget().xcor>bulletX){
+            bulletX=bulletX+10;
+         }
+         if(ingametowers.get(x).findtarget().xcor<bulletX){
+            bulletX=bulletX-10;
+         }
+     }
+     if(Math.abs(ingametowers.get(x).findtarget().ycor-bulletY)>0){
+         if(ingametowers.get(x).findtarget().ycor>bulletY){
+            bulletY=bulletY+10;
+         }
+         if(ingametowers.get(x).findtarget().ycor<bulletY){
+            bulletY=bulletY-10;
+         }
+     }
+     ellipse(bulletX,bulletY,5,20);
      MONSTERSLEFT=attacking.size();
      x=x+1;
    }
@@ -124,7 +146,12 @@ try {
      catch (InterruptedException e) {
        e.printStackTrace();
        }
-      */
+
+            int z=0;
+       while(z<attacking.size()){
+         x=x+50;
+       }     
+             */
             int  d = attacking.size();
             attacking.get(i).display();
             if (attacking.size() < d){
@@ -141,10 +168,10 @@ try {
   }
    if (attacking.size() == 0){
      if(rest==true){
-     fill(0,102,153);
+     fill(255,0,0);
      textSize(20);
-     text("Continue to next wave? Click Enter to Continue", 600,230);
-     text("Click Enter to Continue", 600,260);
+     text("Continue to next wave? Click Enter to Continue", 600,180);
+     text("Click Enter to Continue", 600,205);
      }
      else{
     nextwave();
@@ -211,18 +238,25 @@ System.out.println(start);
      //rect(700,550,100,50);
      fill(0,102,153);
      textSize(20);
-     text("Stats", 630,300);
-     text("Health: "+phealth,630,330);
-     text("Money: "+money,630,350);
-     text("Monsters Left: "+attacking.size(),630,370);
-     text("Round: "+round,630,390);
+     text("Stats", 630,50);
+     text("Health: "+phealth,630,80);
+     text("Money: "+money,630,100);
+     text("Monsters Left: "+attacking.size(),630,120);
+     text("Round: "+round,630,140);
   }
   
   void towertypes(){
+   fill(0);
+   rect(620,300,200,200);
    fill(255);
-   //rect(600,450,100,50);
-   //text("Tower 1", 630,460);
-   //rect(650,460,10,10);   
+   text("Tower 1", 670,350);
+   rect(635,430,30,30);
+   fill(255);
+   text("Tower 2", 670,400);
+   rect(635,430,30,30);   
+   fill(255);
+   text("Tower 3", 670,450);
+   rect(635,430,30,30);        
   }
   
   Tower chooseTower(){
