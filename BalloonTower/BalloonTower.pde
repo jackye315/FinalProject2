@@ -4,7 +4,9 @@
   int rows=20;
   int cols=20;
   
-  PImage img;
+  PImage img1;
+  PImage img2;
+  PImage img3;
   boolean start=false;
   boolean rest;
   int phealth=100;
@@ -26,7 +28,9 @@
   //foo.start();
   
   
-  
+  int value1=0;
+  int value2=0;
+  int value3=0;
     ArrayList<Tower> ingametowers;
   Tower[] tower;
   
@@ -58,7 +62,9 @@
         tower[x]=new Tower(0,0,0,0,0);
         x=x+1; 
      }
-   img=loadImage("Tower1.png");
+   img1=loadImage("Tower1.png");
+   img2=loadImage("Tower2.png");
+   img3=loadImage("Tower3.png");
    rest=false;
    MONSTERSLEFT=attacking.size();
    reachedend=false;
@@ -93,7 +99,8 @@
       }
       info();
       towertypes();
-   
+
+      
    int x=0;
    while(x<ingametowers.size()){
      ingametowers.get(x).Range.clear();
@@ -109,23 +116,28 @@
      float bulletX=ingametowers.get(x).xcor;
      float bulletY=ingametowers.get(x).ycor;
      fill(255);
-     
-     ellipse(bulletX,bulletY,5,20);
+     //rotate((float)ingametowers.get(x).turnangle());
+     int q=0;
+     while(q<50){// ingametowers.get(x).findtarget().xcor != bulletX || ingametowers.get(x).findtarget().ycor != bulletY){
+       
+       ellipse(bulletX,bulletY,2,15);
      if(Math.abs(ingametowers.get(x).findtarget().xcor-bulletX)>0){
          if(ingametowers.get(x).findtarget().xcor>bulletX){
-            bulletX=bulletX+10;
+            bulletX=bulletX+15;
          }
          if(ingametowers.get(x).findtarget().xcor<bulletX){
-            bulletX=bulletX-10;
+            bulletX=bulletX-15;
          }
      }
      if(Math.abs(ingametowers.get(x).findtarget().ycor-bulletY)>0){
          if(ingametowers.get(x).findtarget().ycor>bulletY){
-            bulletY=bulletY+10;
+            bulletY=bulletY+15;
          }
          if(ingametowers.get(x).findtarget().ycor<bulletY){
-            bulletY=bulletY-10;
+            bulletY=bulletY-15;
          }
+     }
+     q=q+1;
      }
      }
      //ellipse(bulletX,bulletY,5,20);
@@ -184,12 +196,12 @@ try {
    }
    if(phealth<=0){
       fill(255);
-      rect(0,0,850,600);
+      rect(0,0,890,650);
       fill(0);
       textSize(30);
-      text("You Lost!",300,300);
+      text("You Lost!",330,300);
       //text("Press 'Y'to play again",300,330); 
-        //if(key==ENTER){
+        //if(key=='Y'){
          //start=false; 
         //}
    }
@@ -200,38 +212,83 @@ try {
 //System.out.println(attacking.size());    
 System.out.println(oldwave.size());
 System.out.println(start);
+if(phealth<=0){
+ start=false; 
+}
   }
   }
   
   void placeTower(){
-    if(money>=50){
-      if(mouseX <600 && mouseY < 600){
-        if(map[mouseY/30][(mouseX)/30].getCond()==0 && map[mouseY/30][mouseX/30].canbuild==true){
-          map[mouseY/30][(mouseX)/30].setCond(1);
+
+      if(money>=50){
+        if(mouseX <600 && mouseY < 600){
+          if(map[mouseY/30][(mouseX)/30].getCond()==0 && map[mouseY/30][mouseX/30].canbuild==true){
+            if(key=='1'){
+              map[mouseY/30][(mouseX)/30].setCond(1);
+                  if(ingametowers.size()==0){
+                    ingametowers.add(new Tower(90,300,1000,(mouseX/30)*30,(mouseY/30)*30));
+                    money=money-50;
+                   }
+                    else{
+          int x=0;
+          while(x<ingametowers.size()){
+            if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
+                ingametowers.add(new Tower(90,300,1000,(mouseX/30)*30,(mouseY/30)*30));
+                money=money-50;
+                x=x+ingametowers.size();
+            }
+            x=x+1;
+          }
+          }
+            }
+            if(key=='2'){
+              map[mouseY/30][(mouseX)/30].setCond(2);
+                  if(ingametowers.size()==0){
+                      ingametowers.add(new Tower(60,700,1000,(mouseX/30)*30,(mouseY/30)*30));
+                      money=money-50;
+                  }
+                   else{
+          int x=0;
+          while(x<ingametowers.size()){
+            if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
+                ingametowers.add(new Tower(60,700,1000,(mouseX/30)*30,(mouseY/30)*30));
+                money=money-50;
+                x=x+ingametowers.size();
+            }
+            x=x+1;
+          }
+          }
+            }
+            if(key=='3'){
+              map[mouseY/30][(mouseX)/30].setCond(4);
+                  if(ingametowers.size()==0){
+                      ingametowers.add(new Tower(120,200,1000,(mouseX/30)*30,(mouseY/30)*30));
+                      money=money-50;
+                    }
+                     else{
+          int x=0;
+          while(x<ingametowers.size()){
+            if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
+                ingametowers.add(new Tower(120,200,1000,(mouseX/30)*30,(mouseY/30)*30));
+                money=money-50;
+                x=x+ingametowers.size();
+            }
+            x=x+1;
+          }
+          }
+            }
           
         
-        
-      
+  
+          
+         
+        }
+        }
+    }
 
-        if(ingametowers.size()==0){
-            ingametowers.add(new Tower(60,1,1000,(mouseX/30)*30,(mouseY/30)*30));
-            money=money-50;
-        }
-        else{
-        int x=0;
-        while(x<ingametowers.size()){
-          if(ingametowers.get(x).xcor != (mouseX/30)*30 || ingametowers.get(x).ycor != (mouseY/30)*30){
-              ingametowers.add(new Tower(60,1,1000,(mouseX/30)*30,(mouseY/30)*30));
-              money=money-50;
-              x=x+ingametowers.size();
-          }
-          x=x+1;
-        }
-        }
-      }
-      }
-  }
-
+  
+  
+  
   }
   
   
@@ -247,17 +304,26 @@ System.out.println(start);
      text("Round: "+round,630,140);
   }
   
-  void towertypes(){
-   fill(0);
+  void towertypes(){    
+   fill(0);               
    rect(620,300,200,200);
+   fill(0,102,153);
+   text("Press '1','2', or '3'",630,520);
+   //text("To Choose Between Towers",600,540);
+   
    fill(255);
    text("Tower 1", 670,350);
-   rect(635,430,30,30);
-   fill(255);
+   fill(value1);
+   rect(635,330,30,30);
+   
+   fill(255);   
    text("Tower 2", 670,400);
-   rect(635,430,30,30);   
-   fill(255);
+   fill(value2);
+   rect(635,380,30,30);  
+   
+   fill(255);   
    text("Tower 3", 670,450);
+   fill(value3);
    rect(635,430,30,30);        
   }
   
@@ -278,7 +344,24 @@ System.out.println(start);
       start=true;
       rest=!rest;
    }
-
+   if(key=='1'){
+     value1=255;
+     value2=0;
+     value3=0;
+   }
+if(key=='2'){
+     value2=255;
+     value1=0;
+     value3=0;
+   }
+ if(key=='3'){
+     value3=255;
+     value1=0;
+     value2=0;
+   }
+   if(key=='y' || key=='Y'){
+     start=false;
+   } 
 
   }
   
@@ -422,7 +505,7 @@ void populate(){
     Random rn = new Random();
   for (int i = 0; i < popsize; i++){
     
-    newp.add(new Monster(rn.nextInt(1)+1,10000, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
+    newp.add(new Monster(rn.nextInt(2)+1,10000, rn.nextInt(255),rn.nextInt(255),rn.nextInt(255)));
 
   }
   attacking = newp;

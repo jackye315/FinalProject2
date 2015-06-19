@@ -64,8 +64,15 @@ class Cell{
     fill(red, blue, green);
     if(this.cond == 1){
       fill(0, 0, 0, 0);
-      image(img,x,y,30,30);
-      
+      image(img1,x,y,30,30);      
+    }
+    if(this.cond == 2){
+      fill(0, 0, 0, 0);
+      image(img2,x,y,30,30);   
+    }
+    if(this.cond == 4){
+      fill(0, 0, 0, 0);
+      image(img3,x,y,30,30);   
     }
     if(this.cond == 3){
       fill(0, 102, 153, 100);

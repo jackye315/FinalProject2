@@ -57,7 +57,7 @@ class Tower{
   
   void Shoot(){
     if(Range.size()>0){
-     findtarget().health=findtarget().health-500; 
+     findtarget().health=findtarget().health-fdamage; 
     }
   }
   
