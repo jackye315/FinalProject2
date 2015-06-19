@@ -105,6 +105,7 @@
        y=y+1; 
      }
      ingametowers.get(x).Shoot();
+     if(ingametowers.get(x).Range.size()>0){
      float bulletX=ingametowers.get(x).xcor;
      float bulletY=ingametowers.get(x).ycor;
      fill(255);
@@ -126,7 +127,8 @@
             bulletY=bulletY-10;
          }
      }
-     ellipse(bulletX,bulletY,5,20);
+     }
+     //ellipse(bulletX,bulletY,5,20);
      MONSTERSLEFT=attacking.size();
      x=x+1;
    }
