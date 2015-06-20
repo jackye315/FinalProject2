@@ -63,7 +63,7 @@ class Monster{
         }
       
        
-    Monster m = new Monster( s,h,r,g,b);
+    Monster m = new Monster( s,h+1000,r,g,b);
   return m;
   }
   void setFit(){
